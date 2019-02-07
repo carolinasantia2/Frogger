@@ -15,20 +15,20 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Literally the world. This class is very important to understand.
- * Here we spawn our hazards (StaticBase), and our tiles (BaseArea)
+ * Literally the world. This class is very important to understand. Here we
+ * spawn our hazards (StaticBase), and our tiles (BaseArea)
  * 
- * We move the screen, the player, and some hazards. 
- * 				How? Figure it out.
+ * We move the screen, the player, and some hazards. How? Figure it out.
  */
 public class WorldManager {
 
-	private ArrayList<BaseArea> AreasAvailables;			// Lake, empty and grass area (NOTE: The empty tile is just the "sand" tile. Ik, weird name.)
-	private ArrayList<StaticBase> StaticEntitiesAvailables;	// Has the hazards: LillyPad, Log, Tree, and Turtle.
+	private ArrayList<BaseArea> AreasAvailables; // Lake, empty and grass area (NOTE: The empty tile is just the "sand"
+													// tile. Ik, weird name.)
+	private ArrayList<StaticBase> StaticEntitiesAvailables; // Has the hazards: LillyPad, Log, Tree, and Turtle.
 
-	private ArrayList<BaseArea> SpawnedAreas;				// Areas currently on world
-	private ArrayList<StaticBase> SpawnedHazards;			// Hazards currently on world.
-	
+	private ArrayList<BaseArea> SpawnedAreas; // Areas currently on world
+	private ArrayList<StaticBase> SpawnedHazards; // Hazards currently on world.
+
 	private StaticBase lastSpawned;
 
 	Long time;
@@ -36,25 +36,23 @@ public class WorldManager {
 
 	Handler handler;
 
-
-	private Player player;									// How do we find the frog coordinates? How do we find the Collisions? This bad boy.
+	private Player player; // How do we find the frog coordinates? How do we find the Collisions? This bad
+							// boy.
 
 	UIManager object = new UIManager(handler);
 	UI.UIManager.Vector object2 = object.new Vector();
 
-
-	private ID[][] grid;									
-	private int gridWidth,gridHeight;						// Size of the grid. 
-	private int movementSpeed;								// Movement of the tiles going downwards.
-
-
+	private ID[][] grid;
+	private int gridWidth, gridHeight; // Size of the grid.
+	private int movementSpeed; // Movement of the tiles going downwards.
+	
 	public WorldManager(Handler handler) {
 		this.handler = handler;
 
-		AreasAvailables = new ArrayList<>();				// Here we add the Tiles to be utilized.
-		StaticEntitiesAvailables = new ArrayList<>();		// Here we add the Hazards to be utilized.
+		AreasAvailables = new ArrayList<>(); // Here we add the Tiles to be utilized.
+		StaticEntitiesAvailables = new ArrayList<>(); // Here we add the Hazards to be utilized.
 
-		AreasAvailables.add(new GrassArea(handler, 0));		
+		AreasAvailables.add(new GrassArea(handler, 0));
 		AreasAvailables.add(new WaterArea(handler, 0));
 		AreasAvailables.add(new EmptyArea(handler, 0));
 
@@ -66,60 +64,65 @@ public class WorldManager {
 		SpawnedAreas = new ArrayList<>();
 		SpawnedHazards = new ArrayList<>();
 
-		player = new Player(handler);       
+		player = new Player(handler);
 
-		gridWidth = handler.getWidth()/64;
-		gridHeight = handler.getHeight()/64;
+		gridWidth = handler.getWidth() / 64;
+		gridHeight = handler.getHeight() / 64;
 		movementSpeed = 1;
 		// movementSpeed = 20; I dare you.
 
-		/* 
-		 * 	Spawn Areas in Map (2 extra areas spawned off screen)
-		 *  To understand this, go down to randomArea(int yPosition) 
+		/*
+		 * Spawn Areas in Map (2 extra areas spawned off screen) To understand this, go
+		 * down to randomArea(int yPosition)
 		 */
-		for(int i=0; i<gridHeight+2; i++) {
-			SpawnedAreas.add(randomArea((-2+i)*64));
+		for (int i = 0; i < gridHeight + 2; i++) {
+			if (i >= gridHeight-2) {
+				SpawnedAreas.add(new GrassArea(handler, (-2 + i) * 64));
+			} else {
+				SpawnedAreas.add(randomArea((-2 + i) * 64));
+			}
 		}
 
-		player.setX((gridWidth/2)*64);
-		player.setY((gridHeight-3)*64);
+		player.setX((gridWidth / 2) * 64);
+		player.setY((gridHeight - 3) * 64);
 
 		// Not used atm.
 		grid = new ID[gridWidth][gridHeight];
 		for (int x = 0; x < gridWidth; x++) {
 			for (int y = 0; y < gridHeight; y++) {
-				grid[x][y]=ID.EMPTY;
+				grid[x][y] = ID.EMPTY;
 			}
 		}
 	}
 
 	public void tick() {
 
-		if(this.handler.getKeyManager().keyJustPressed(this.handler.getKeyManager().num[2])) {
+		if (this.handler.getKeyManager().keyJustPressed(this.handler.getKeyManager().num[2])) {
 			this.object2.word = this.object2.word + this.handler.getKeyManager().str[1];
 		}
-		if(this.handler.getKeyManager().keyJustPressed(this.handler.getKeyManager().num[0])) {
+		if (this.handler.getKeyManager().keyJustPressed(this.handler.getKeyManager().num[0])) {
 			this.object2.word = this.object2.word + this.handler.getKeyManager().str[2];
 		}
-		if(this.handler.getKeyManager().keyJustPressed(this.handler.getKeyManager().num[1])) {
+		if (this.handler.getKeyManager().keyJustPressed(this.handler.getKeyManager().num[1])) {
 			this.object2.word = this.object2.word + this.handler.getKeyManager().str[0];
 		}
-		if(this.handler.getKeyManager().keyJustPressed(this.handler.getKeyManager().num[3])) {
+		if (this.handler.getKeyManager().keyJustPressed(this.handler.getKeyManager().num[3])) {
 			this.object2.addVectors();
 		}
-		if(this.handler.getKeyManager().keyJustPressed(this.handler.getKeyManager().num[4]) && this.object2.isUIInstance) {
+		if (this.handler.getKeyManager().keyJustPressed(this.handler.getKeyManager().num[4])
+				&& this.object2.isUIInstance) {
 			this.object2.scalarProduct(handler);
 		}
 
-		if(this.reset) {
+		if (this.reset) {
 			time = System.currentTimeMillis();
 			this.reset = false;
 		}
 
-		if(this.object2.isSorted) {
+		if (this.object2.isSorted) {
 
-			if(System.currentTimeMillis() - this.time >= 2000) {		
-				this.object2.setOnScreen(true);	
+			if (System.currentTimeMillis() - this.time >= 2000) {
+				this.object2.setOnScreen(true);
 				this.reset = true;
 			}
 
@@ -132,8 +135,6 @@ public class WorldManager {
 			hazard.tick();
 		}
 
-
-
 		for (int i = 0; i < SpawnedAreas.size(); i++) {
 			SpawnedAreas.get(i).setYPosition(SpawnedAreas.get(i).getYPosition() + movementSpeed);
 
@@ -142,7 +143,7 @@ public class WorldManager {
 				// Replace with a new random area and position it on top
 				SpawnedAreas.set(i, randomArea(-2 * 64));
 			}
-			//Make sure players position is synchronized with area's movement
+			// Make sure players position is synchronized with area's movement
 			if (SpawnedAreas.get(i).getYPosition() < player.getY()
 					&& player.getY() - SpawnedAreas.get(i).getYPosition() < 3) {
 				player.setY(SpawnedAreas.get(i).getYPosition());
@@ -152,15 +153,14 @@ public class WorldManager {
 		HazardMovement();
 
 		player.tick();
-		//make player move the same as the areas
-		player.setY(player.getY()+movementSpeed); 
+		// make player move the same as the areas
+		player.setY(player.getY() + movementSpeed);
 
 		object2.tick();
 
 	}
 
 	private void HazardMovement() {
-
 		for (int i = 0; i < SpawnedHazards.size(); i++) {
 
 			// Moves hazard down
@@ -187,10 +187,9 @@ public class WorldManager {
 		}
 	}
 
+	public void render(Graphics g) {
 
-	public void render(Graphics g){
-
-		for(BaseArea area : SpawnedAreas) {
+		for (BaseArea area : SpawnedAreas) {
 			area.render(g);
 		}
 
@@ -199,69 +198,64 @@ public class WorldManager {
 
 		}
 
-		player.render(g);       
-		this.object2.render(g);      
+		player.render(g);
+		this.object2.render(g);
 
 	}
 
 	/*
-	 * Given a yPosition, this method will return a random Area out of the Available ones.)
-	 * It is also in charge of spawning hazards at a specific condition.
+	 * Given a yPosition, this method will return a random Area out of the Available
+	 * ones.) It is also in charge of spawning hazards at a specific condition.
 	 */
 	private BaseArea randomArea(int yPosition) {
 		Random rand = new Random();
 
 		// From the AreasAvailable, get me any random one.
-		BaseArea randomArea = AreasAvailables.get(rand.nextInt(AreasAvailables.size())); 
+		BaseArea randomArea = AreasAvailables.get(rand.nextInt(AreasAvailables.size()));
 
-		if(randomArea instanceof GrassArea) {
+		if (randomArea instanceof GrassArea) {
 			randomArea = new GrassArea(handler, yPosition);
-		}
-		else if(randomArea instanceof WaterArea) {
+		} else if (randomArea instanceof WaterArea) {
 			randomArea = new WaterArea(handler, yPosition);
 			SpawnHazard(yPosition);
-		}
-		else {
+		} else {
 			randomArea = new EmptyArea(handler, yPosition);
 		}
 		return randomArea;
 	}
 
 	/*
-	 * Given a yPositionm this method will add a new hazard to the SpawnedHazards ArrayList
+	 * Given a yPosition this method will add a new hazard to the SpawnedHazards
+	 * ArrayList
 	 */
 	private void SpawnHazard(int yPosition) {
 		Random rand = new Random();
 		int randInt;
 		int choice;
-		if(lastSpawned == null || !(lastSpawned instanceof LillyPad)){
-			choice =  rand.nextInt(7);
-		}else {
+		if (lastSpawned == null || !(lastSpawned instanceof LillyPad)) {
+			choice = rand.nextInt(7);
+		} else {
 			choice = 2;
 		}
-		if (choice <=2) {
+		if (choice <= 2) {
 			randInt = 64 * rand.nextInt(4);
 			SpawnedHazards.add(new Log(handler, randInt, yPosition));
-			lastSpawned=new Log(handler,0,0);
-		}
-		else if (choice >=5){
+			lastSpawned = new Log(handler, 0, 0);
+		} else if (choice >= 5) {
 
-			for(int m = 0; m < rand.nextInt(7) ; m++) {
-				randInt =  64 * rand.nextInt(9); // ESTAS TRABAJANDO AQUIIIIIIIIII (*64)
-				SpawnedHazards.add(new LillyPad(handler, randInt, yPosition));	
-				lastSpawned=new LillyPad(handler,0,0); // added
+			for (int m = 0; m < rand.nextInt(7); m++) {
+				randInt = 64 * rand.nextInt(9); // ESTAS TRABAJANDO AQUIIIIIIIIII (*64)
+				SpawnedHazards.add(new LillyPad(handler, randInt, yPosition));
+				lastSpawned = new LillyPad(handler, 0, 0); // added
 
 			}
-		}
-		else {
+		} else {
 			randInt = 64 * rand.nextInt(3);
 			SpawnedHazards.add(new Turtle(handler, randInt, yPosition));
-			lastSpawned=new Turtle(handler,0,0);
+			lastSpawned = new Turtle(handler, 0, 0);
 
 		}
-	
 
 	}
 
 }
-
