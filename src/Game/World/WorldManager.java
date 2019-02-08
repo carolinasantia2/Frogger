@@ -45,7 +45,7 @@ public class WorldManager {
 	private ID[][] grid;
 	private int gridWidth, gridHeight; // Size of the grid.
 	private int movementSpeed; // Movement of the tiles going downwards.
-	
+
 	public WorldManager(Handler handler) {
 		this.handler = handler;
 
@@ -58,7 +58,7 @@ public class WorldManager {
 
 		StaticEntitiesAvailables.add(new LillyPad(handler, 0, 0));
 		StaticEntitiesAvailables.add(new Log(handler, 0, 0));
-		StaticEntitiesAvailables.add(new Tree(handler));
+		StaticEntitiesAvailables.add(new Tree(handler, 0, 0));
 		StaticEntitiesAvailables.add(new Turtle(handler, 0, 0));
 
 		SpawnedAreas = new ArrayList<>();
@@ -76,7 +76,7 @@ public class WorldManager {
 		 * down to randomArea(int yPosition)
 		 */
 		for (int i = 0; i < gridHeight + 2; i++) {
-			if (i >= gridHeight-2) {
+			if (i >= gridHeight - 2) {
 				SpawnedAreas.add(new GrassArea(handler, (-2 + i) * 64));
 			} else {
 				SpawnedAreas.add(randomArea((-2 + i) * 64));
@@ -215,6 +215,7 @@ public class WorldManager {
 
 		if (randomArea instanceof GrassArea) {
 			randomArea = new GrassArea(handler, yPosition);
+			SpawnHazard2(yPosition);
 		} else if (randomArea instanceof WaterArea) {
 			randomArea = new WaterArea(handler, yPosition);
 			SpawnHazard(yPosition);
@@ -255,6 +256,15 @@ public class WorldManager {
 			lastSpawned = new Turtle(handler, 0, 0);
 
 		}
+
+	}
+
+	private void SpawnHazard2(int yPosition) {
+		Random rand = new Random();
+		int randInt;
+
+		randInt = 64 * rand.nextInt(4);
+		SpawnedHazards.add(new Tree(handler, randInt, yPosition));
 
 	}
 

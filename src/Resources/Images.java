@@ -44,6 +44,8 @@ public class Images {
     public static BufferedImage lilly;
     public static BufferedImage log;
     public static BufferedImage grass;
+    
+    public static BufferedImage tree;
 
     public static BufferedImage[] object;
 
@@ -138,6 +140,7 @@ public class Images {
             grassArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/grassArea.png"));
             waterArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/waterArea.png"));
             emptyArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/sand.jpg"));
+            tree = ImageIO.read(getClass().getResourceAsStream("/Sheets/tree.png"));
 
             
         }catch (IOException e) {
