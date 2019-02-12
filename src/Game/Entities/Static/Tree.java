@@ -12,7 +12,6 @@ public class Tree extends StaticBase {
 	
     public Tree(Handler handler,int xPosition, int yPosition) {
         super(handler);
-        // Sets original position to be this one.
         this.setY(yPosition);
         this.setX(xPosition);
         
@@ -22,14 +21,13 @@ public class Tree extends StaticBase {
     public void render(Graphics g) {
     	
     	g.drawImage(Images.tree, this.getX(), this.getY(), 64, 64, null);
-    	Tree = new Rectangle(this.getX(), this.getY()+5, 64, 55);
+    	Tree = new Rectangle(this.getX(), this.getY(), 64, 55);
 
     }
     
     
     @Override
     public Rectangle GetCollision() {
-    	
     	return Tree;
     }
 }

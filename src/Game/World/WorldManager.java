@@ -23,7 +23,7 @@ import java.util.Random;
 public class WorldManager {
 
 	private ArrayList<BaseArea> AreasAvailables; // Lake, empty and grass area (NOTE: The empty tile is just the "sand"
-													// tile. Ik, weird name.)
+	// tile. Ik, weird name.)
 	private ArrayList<StaticBase> StaticEntitiesAvailables; // Has the hazards: LillyPad, Log, Tree, and Turtle.
 
 	private ArrayList<BaseArea> SpawnedAreas; // Areas currently on world
@@ -37,7 +37,7 @@ public class WorldManager {
 	Handler handler;
 
 	private Player player; // How do we find the frog coordinates? How do we find the Collisions? This bad
-							// boy.
+	// boy.
 
 	UIManager object = new UIManager(handler);
 	UI.UIManager.Vector object2 = object.new Vector();
@@ -68,7 +68,7 @@ public class WorldManager {
 
 		gridWidth = handler.getWidth() / 64;
 		gridHeight = handler.getHeight() / 64;
-		movementSpeed = 1;
+		movementSpeed = 0;
 		// movementSpeed = 20; I dare you.
 
 		/*
@@ -151,6 +151,7 @@ public class WorldManager {
 		}
 
 		HazardMovement();
+		HazardCollision();
 
 		player.tick();
 		// make player move the same as the areas
@@ -183,6 +184,30 @@ public class WorldManager {
 			// if hazard has passed the screen height, then remove this hazard.
 			if (SpawnedHazards.get(i).getY() > handler.getHeight()) {
 				SpawnedHazards.remove(i);
+			}
+		}
+	}
+
+	private void HazardCollision() {
+
+		for (int i = 0; i < SpawnedHazards.size(); i++) {
+
+			if (!SpawnedHazards.isEmpty() && SpawnedHazards.get(i )instanceof Tree
+					&& SpawnedHazards.get(i).GetCollision() != null
+					&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
+
+				if (player.facing.equals("UP")) {
+					player.setY(player.getY()+16);
+
+				}if (player.facing.equals("DOWN")){
+					player.setY(player.getY()-16);
+
+				}if (player.facing.equals("LEFT")){
+					player.setX(player.getX()+16);
+
+				}if (player.facing.equals("RIGHT")){
+					player.setX(player.getX()-16);
+				}
 			}
 		}
 	}
@@ -262,10 +287,11 @@ public class WorldManager {
 	private void SpawnHazard2(int yPosition) {
 		Random rand = new Random();
 		int randInt;
-
-		randInt = 64 * rand.nextInt(4);
-		SpawnedHazards.add(new Tree(handler, randInt, yPosition));
-
+		int choice = rand.nextInt(5);
+		if (choice <=5) {
+			randInt = 64 * rand.nextInt(5);
+			SpawnedHazards.add(new Tree(handler, randInt, yPosition));
+		}
 	}
 
 }
