@@ -61,7 +61,7 @@ public class Player extends EntityBase {
         index=0;
 
         /////////////////MOVE UP///////////////
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_W) && !moving && facing.equals("UP")){
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_W) && !moving && facing.equals("UP") && player.getY() >= 32){
             moving=true;
         }else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_W) && !moving && !facing.equals("UP")){
             if(facing.equals("DOWN")) {
@@ -85,7 +85,7 @@ public class Player extends EntityBase {
         }
 
         /////////////////MOVE LEFT///////////////
-        else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_A) && !moving && facing.equals("LEFT")){
+        else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_A) && !moving && facing.equals("LEFT") && player.getX() >= 64){
             moving=true;
         }else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_A) && !moving&& !facing.equals("LEFT")){
             if(facing.equals("RIGHT")) {
@@ -96,7 +96,7 @@ public class Player extends EntityBase {
         }
 
         /////////////////MOVE DOWN///////////////
-        else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S) && !moving && facing.equals("DOWN")){
+        else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S) && !moving && facing.equals("DOWN") && player.getY() <= 639){
             moving=true;
         }else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S) && !moving && !facing.equals("DOWN")){
             reGrid();
@@ -107,7 +107,7 @@ public class Player extends EntityBase {
         }
 
         /////////////////MOVE RIGHT///////////////
-        else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_D) && !moving && facing.equals("RIGHT")){
+        else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_D) && !moving && facing.equals("RIGHT") && player.getX() <= 511 ){
             moving=true;
         }else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_D) && !moving&& !facing.equals("RIGHT")){
             if(facing.equals("LEFT")) {
