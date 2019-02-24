@@ -20,6 +20,9 @@ public class Player extends EntityBase {
     private Boolean moving = false;
     private int moveCoolDown=0;
 
+	public static int counter = 0;
+	public static int internalCounter = 0;
+	
     private int index =0;
 
     public Player(Handler handler) {
@@ -63,6 +66,12 @@ public class Player extends EntityBase {
         /////////////////MOVE UP///////////////
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_W) && !moving && facing.equals("UP") && player.getY() >= 32){
             moving=true;
+            
+			internalCounter++;
+			if ( internalCounter > counter) {
+				counter = internalCounter;
+			}
+			
         }else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_W) && !moving && !facing.equals("UP")){
             if(facing.equals("DOWN")) {
                 if(this.getX() % 64 >= 64 / 2 ) {
@@ -98,6 +107,8 @@ public class Player extends EntityBase {
         /////////////////MOVE DOWN///////////////
         else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S) && !moving && facing.equals("DOWN") && player.getY() <= 639){
             moving=true;
+            internalCounter--;
+            
         }else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S) && !moving && !facing.equals("DOWN")){
             reGrid();
             if(facing.equals("RIGHT")){

@@ -69,7 +69,7 @@ public class GameOver extends State {
         Font fontScore = new Font("IMPACT", 30, 28);
         g.setFont(fontScore);
         g.setColor(Color.WHITE);
-        g.drawString("1000" /*+ Player.counter*/, 530/2 , 768/2 - 10);
+        g.drawString("" + Player.counter, 530/2 , 768/2 - 10);
 
     }
 }

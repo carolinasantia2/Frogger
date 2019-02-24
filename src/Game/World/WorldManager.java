@@ -7,6 +7,7 @@ import Game.Entities.Static.StaticBase;
 import Game.Entities.Static.Tree;
 import Game.Entities.Static.Turtle;
 import Main.Handler;
+import Resources.Images;
 import UI.UIManager;
 
 import java.awt.*;
@@ -69,6 +70,8 @@ public class WorldManager {
 		gridWidth = handler.getWidth() / 64;
 		gridHeight = handler.getHeight() / 64;
 		movementSpeed = 1;
+		Player.internalCounter = 0;
+		Player.counter=0;
 		// movementSpeed = 20; I dare you.
 
 		/*
@@ -197,10 +200,13 @@ public class WorldManager {
 					&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
 
 				if (player.facing.equals("UP")) {
-					player.setY(player.getY()+16);
+					player.setY(player.getY()+64);
+					Player.counter--;
+					Player.internalCounter--;
 
 				}if (player.facing.equals("DOWN")){
-					player.setY(player.getY()-16);
+					player.setY(player.getY()-64);
+					Player.internalCounter++;
 
 				}if (player.facing.equals("LEFT")){
 					player.setX(player.getX()+16);
@@ -225,6 +231,7 @@ public class WorldManager {
 
 		player.render(g);
 		this.object2.render(g);
+		MiniMenu(g, Color.BLACK);
 
 	}
 
@@ -294,6 +301,15 @@ public class WorldManager {
 				SpawnedHazards.add(new Tree(handler, randInt, yPosition));
 			}
 		}
+	}
+	
+	private void MiniMenu(Graphics g, Color d) {//menu del score
+		Font fontScore = new Font("IMPACT", 30, 28);
+		g.setColor(d);
+		g.fillRect(0, 0, 576, 32);
+		g.setColor(Color.WHITE);
+		g.setFont(fontScore);
+		g.drawString("Sapito Score: " + Player.counter, 3, 25);
 	}
 
 }
