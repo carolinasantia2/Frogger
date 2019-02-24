@@ -25,9 +25,12 @@ public class Images {
     public static BufferedImage[] Resume;
     public static BufferedImage[] BTitle;
     public static BufferedImage[] Options;
+    public static BufferedImage[] Restart;
+    public static BufferedImage[] Exit;
     public static ImageIcon icon;
     public static String str;
     public static BufferedImage icon2;
+    public static BufferedImage gameover;
 
     public static SpriteSheet playerSheet;
     public static BufferedImage[] Player;
@@ -56,6 +59,8 @@ public class Images {
         Resume = new BufferedImage[2];
         BTitle = new BufferedImage[2];
         Options = new BufferedImage[2];
+        Restart = new BufferedImage[2];
+        Exit = new BufferedImage[2];
         Player = new BufferedImage[8];
         Turtle = new BufferedImage[20];
         Water = new BufferedImage[3];
@@ -64,9 +69,10 @@ public class Images {
         try {
             playerSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/gameSprites.png")));
             WaterSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/water.png")));
-
+            
             title = ImageIO.read(getClass().getResourceAsStream("/Sheets/Frogger2.png"));
             Pause = ImageIO.read(getClass().getResourceAsStream("/Buttons/Pause.png"));
+            gameover = ImageIO.read(getClass().getResourceAsStream("/Buttons/GameOverState.png"));
             Resume[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/ResumeButton.png"));
             Resume[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/ResumeButton2.png"));
             BTitle[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/TitleButton.png"));
@@ -76,6 +82,11 @@ public class Images {
             butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/StartButton.png"));//normbut
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/Startbutton2.png"));//hoverbut
             butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/StartButton3.png"));//clickbut
+            Restart[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/restart1.jpg"));
+            Restart[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/restart2.jpg"));
+            Exit[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/exit1.jpg"));
+            Exit[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/exit2.jpg"));
+            
             
             Player[0]= playerSheet.crop(0,30,52,39);
             Player[1]= playerSheet.crop(53,25,59,46);

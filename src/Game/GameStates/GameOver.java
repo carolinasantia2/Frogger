@@ -7,15 +7,17 @@ import UI.UIManager;
 
 import java.awt.*;
 
+import Game.Entities.Dynamic.Player;
+
 /**
  * Created by AlexVR on 7/1/2018.
  */
-public class PauseState extends State {
+public class GameOver extends State {
 
     private int count = 0;
     private UIManager uiManager;
 
-    public PauseState(Handler handler) {
+    public GameOver(Handler handler) {
         super(handler);
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUimanager(uiManager);
@@ -23,17 +25,18 @@ public class PauseState extends State {
         /*
          * Adds a button that by being pressed changes the State
          */
-        uiManager.addObjects(new UIImageButton(33, handler.getGame().getHeight() - 150, 128, 64, Images.Resume, () -> {
+        uiManager.addObjects(new UIImageButton(40, handler.getGame().getHeight() - 200, 160, 75, Images.Restart, () -> {
             handler.getMouseManager().setUimanager(null);
+            handler.getGame().reStart();            
             State.setState(handler.getGame().gameState);
         }));
 
 //        uiManager.addObjects(new UIImageButton(33 + 192,  handler.getGame().getHeight() - 150, 128, 64, Images.Options, () -> {
 //            handler.getMouseManager().setUimanager(null);
-//            State.setState(handler.getGame().gameOverState);
+//            State.setState(handler.getGame().menuState);
 //        }));
 
-        uiManager.addObjects(new UIImageButton(33 + 192 * 2,  handler.getGame().getHeight() - 150, 128, 64, Images.BTitle, () -> {
+        uiManager.addObjects(new UIImageButton(40 + 175 * 2,  handler.getGame().getHeight() - 200, 160, 75, Images.Exit, () -> {
             handler.getMouseManager().setUimanager(null);
             State.setState(handler.getGame().menuState);
         }));
@@ -61,8 +64,12 @@ public class PauseState extends State {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Images.Pause,0,0,handler.getGame().getWidth(),handler.getGame().getHeight(),null);
+        g.drawImage(Images.gameover,0,0,handler.getGame().getWidth(),handler.getGame().getHeight(),null);
         uiManager.Render(g);
+        Font fontScore = new Font("IMPACT", 30, 28);
+        g.setFont(fontScore);
+        g.setColor(Color.WHITE);
+        g.drawString("1000" /*+ Player.counter*/, 530/2 , 768/2 - 10);
 
     }
 }
