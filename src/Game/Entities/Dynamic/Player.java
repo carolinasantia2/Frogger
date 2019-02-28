@@ -48,7 +48,7 @@ public class Player extends EntityBase {
 		if(!moving){
 			move();
 		}
-		//HazardCollision2();
+		HazardCollision2();
 	}
 
 	private void reGrid() {

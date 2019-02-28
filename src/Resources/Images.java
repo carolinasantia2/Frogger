@@ -31,6 +31,7 @@ public class Images {
     public static String str;
     public static BufferedImage icon2;
     public static BufferedImage gameover;
+    public static BufferedImage controls;
 
     public static SpriteSheet playerSheet;
     public static BufferedImage[] Player;
@@ -92,6 +93,7 @@ public class Images {
             title = ImageIO.read(getClass().getResourceAsStream("/Buttons/Menu.png"));
             Pause = ImageIO.read(getClass().getResourceAsStream("/Buttons/Pause.png"));
             gameover = ImageIO.read(getClass().getResourceAsStream("/Buttons/GameOverState.png"));
+            controls = ImageIO.read(getClass().getResourceAsStream("/Buttons/Controls.png"));
             Resume[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/ResumeButton.png"));
             Resume[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/ResumeButton2.png"));
             BTitle[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/TitleButton.png"));

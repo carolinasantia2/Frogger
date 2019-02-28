@@ -12,11 +12,11 @@ import java.awt.*;
 /**
  * Created by AlexVR on 7/1/2018.
  */
-public class MenuState extends State {
+public class ControlsState extends State {
 
     private UIManager uiManager;
 
-    public MenuState(Handler handler) {
+    public ControlsState(Handler handler) {
         super(handler);
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUimanager(uiManager);
@@ -29,7 +29,7 @@ public class MenuState extends State {
 
         uiManager.addObjects(new UIImageButton(0 + 175 * 2 -40,  handler.getGame().getHeight() - 200+50, 160, 75, Images.BTitle, () -> {
             handler.getMouseManager().setUimanager(null);
-            State.setState(handler.getGame().controlsState);
+            State.setState(handler.getGame().menuState);
         }));
     }
 
@@ -44,7 +44,7 @@ public class MenuState extends State {
     public void render(Graphics g) {
         g.setColor(Color.darkGray);
         g.fillRect(0,0,handler.getWidth(),handler.getHeight());
-        g.drawImage(Images.title,0,0,handler.getGame().getWidth(),handler.getGame().getHeight(),null);
+        g.drawImage(Images.controls,0,0,handler.getGame().getWidth(),handler.getGame().getHeight(),null);
         uiManager.Render(g);
 
     }
