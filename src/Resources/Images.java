@@ -82,10 +82,10 @@ public class Images {
             butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/StartButton.png"));//normbut
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/Startbutton2.png"));//hoverbut
             butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/StartButton3.png"));//clickbut
-            Restart[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/restart1.png"));
-            Restart[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/restart2.png"));
-            Exit[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/exit1.png"));
-            Exit[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/exit2.png"));
+            Restart[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/restart2.png"));
+            Restart[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/restart1.png"));
+            Exit[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/exit2.png"));
+            Exit[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/exit1.png"));
             
             
             Player[0]= playerSheet.crop(0,30,52,39);

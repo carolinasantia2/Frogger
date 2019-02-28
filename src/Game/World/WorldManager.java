@@ -27,7 +27,7 @@ public class WorldManager {
 	// tile. Ik, weird name.)
 	private ArrayList<StaticBase> StaticEntitiesAvailables; // Has the hazards: LillyPad, Log, Tree, and Turtle.
 
-	private ArrayList<BaseArea> SpawnedAreas; // Areas currently on world
+	public ArrayList<BaseArea> SpawnedAreas; // Areas currently on world
 	private ArrayList<StaticBase> SpawnedHazards; // Hazards currently on world.
 
 	private StaticBase lastSpawned;
@@ -37,8 +37,7 @@ public class WorldManager {
 
 	Handler handler;
 
-	private Player player; // How do we find the frog coordinates? How do we find the Collisions? This bad
-	// boy.
+	private Player player; // How do we find the frog coordinates? How do we find the Collisions? This bad boy.
 
 	UIManager object = new UIManager(handler);
 	UI.UIManager.Vector object2 = object.new Vector();
@@ -46,6 +45,7 @@ public class WorldManager {
 	private ID[][] grid;
 	private int gridWidth, gridHeight; // Size of the grid.
 	private int movementSpeed; // Movement of the tiles going downwards.
+	public boolean dead = false;
 
 	public WorldManager(Handler handler) {
 		this.handler = handler;
@@ -155,6 +155,7 @@ public class WorldManager {
 
 		HazardMovement();
 		HazardCollision();
+		HazardWaterCollision();
 
 		player.tick();
 		// make player move the same as the areas
@@ -216,7 +217,9 @@ public class WorldManager {
 			
 		}
 	}
-
+	/*NEW
+	 * Check if the have a collision with the tree.
+	 */
 	private void HazardCollision() {
 
 		for (int i = 0; i < SpawnedHazards.size(); i++) {
@@ -240,6 +243,22 @@ public class WorldManager {
 				}if (player.facing.equals("RIGHT")){
 					player.setX(player.getX()-16);
 				}
+			}
+		}
+	}
+	/*NEW
+	 * Check if the player intersect a water hazard
+	 */
+	public void HazardWaterCollision() {
+
+		for (int i = 0; i < SpawnedHazards.size(); i++) {
+
+			if ((SpawnedHazards.get(i)instanceof Log || SpawnedHazards.get(i)instanceof LillyPad 
+					|| SpawnedHazards.get(i)instanceof Turtle)
+					&&!handler.getWorld().SpawnedHazards.isEmpty()
+					&& SpawnedHazards.get(i).GetCollision() != null
+					&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())){
+				dead = false;
 			}
 		}
 	}
@@ -315,7 +334,7 @@ public class WorldManager {
 		} else if (choice > 5) {
 
 			for (int m = 0; m < rand.nextInt(7); m++) { // Adds random Lillypads
-				randInt = (64 * rand.nextInt(8)) + 32; 
+				randInt = (64 * rand.nextInt(8)); 
 				SpawnedHazards.add(new LillyPad(handler, randInt, yPosition));
 				lastSpawned = new LillyPad(handler, 0, 0); // dummy LillyPad
 
@@ -328,19 +347,23 @@ public class WorldManager {
 		}
 
 	}
-
+	/*NEW
+	 * Given a yPosition this method will spawn a new tree.
+	 */
 	private void SpawnHazard2(int yPosition) {
 		Random rand = new Random();
 		int randInt;
-		int choice = rand.nextInt(5);
-		for (int m = 0; m < rand.nextInt(5); m++) {
+		int choice = rand.nextInt(9);
+		for (int m = 0; m < rand.nextInt(9); m++) {
 			if (choice <=5 && !(lastSpawned instanceof LillyPad)) {
 				randInt = 64 * rand.nextInt(9);
 				SpawnedHazards.add(new Tree(handler, randInt, yPosition));
 			}
 		}
 	}
-
+	/*NEW
+	 * Given a yPosition this method will spawn a new tree.
+	 */
 	private void MiniMenu(Graphics g, Color d) {//menu del score
 		Font fontScore = new Font("IMPACT", 30, 28);
 		g.setColor(d);

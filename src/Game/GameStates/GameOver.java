@@ -66,10 +66,10 @@ public class GameOver extends State {
     public void render(Graphics g) {
         g.drawImage(Images.gameover,0,0,handler.getGame().getWidth(),handler.getGame().getHeight(),null);
         uiManager.Render(g);
-        Font fontScore = new Font("IMPACT", 30, 28);
+        Font fontScore = new Font("IMPACT", 60, 60);
         g.setFont(fontScore);
-        g.setColor(Color.WHITE);
-        g.drawString("" + Player.counter, 530/2 , 768/2 - 10);
+        g.setColor(Color.CYAN);
+        g.drawString("Score: " + Player.counter, 30, 768/3 +15);
 
     }
 }

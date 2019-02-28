@@ -1,6 +1,8 @@
 package Game.Entities.Dynamic;
 
 import Game.Entities.EntityBase;
+import Game.GameStates.State;
+import Game.World.WaterArea;
 import Main.Handler;
 import Resources.Images;
 
@@ -35,6 +37,10 @@ public class Player extends EntityBase {
 
     public void tick(){
 
+    	if (handler.getWorld().dead) {
+			State.setState(handler.getGame().gameOverState);
+		}
+    	
         if(moving) {
             animateMovement();
         }
@@ -42,7 +48,7 @@ public class Player extends EntityBase {
         if(!moving){
             move();
         }
-
+        HazardCollision2();
     }
 
     private void reGrid() {
@@ -62,6 +68,10 @@ public class Player extends EntityBase {
             moveCoolDown++;
         }
         index=0;
+        
+        if (player.getY() >= 760 ) {
+			State.setState(handler.getGame().gameOverState);
+		}else
 
         /////////////////MOVE UP///////////////
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_W) && !moving && facing.equals("UP") && player.getY() >= 32){
@@ -105,7 +115,7 @@ public class Player extends EntityBase {
         }
 
         /////////////////MOVE DOWN///////////////
-        else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S) && !moving && facing.equals("DOWN") && player.getY() <= 639){
+        else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S) && !moving && facing.equals("DOWN")){
             moving=true;
             internalCounter--;
             
@@ -239,5 +249,19 @@ public class Player extends EntityBase {
     public Rectangle getPlayerCollision() {
         return player;
     }
+    /*
+	 * Check if the player is in the water area and kill him.
+	 */
+	public void HazardCollision2() {
+		handler.getWorld().dead = false;
+		for (int i = 0; i < handler.getWorld().SpawnedAreas.size(); i++) {
+
+			if (!handler.getWorld().SpawnedAreas.isEmpty() && handler.getWorld().SpawnedAreas.get(i) instanceof WaterArea
+					&& (handler.getWorld().SpawnedAreas.get(i).getYPosition() < player.getY())
+					&& (handler.getWorld().SpawnedAreas.get(i).getYPosition()+10 > player.getY())) {
+				handler.getWorld().dead = true;
+			}
+		}
+	}
 
 }
