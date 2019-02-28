@@ -3,11 +3,14 @@ package Game.World;
 import Game.Entities.Dynamic.Player;
 import Game.Entities.Static.LillyPad;
 import Game.Entities.Static.Log;
+import Game.Entities.Static.RareCandy;
 import Game.Entities.Static.StaticBase;
 import Game.Entities.Static.Tree;
 import Game.Entities.Static.Turtle;
+import Game.GameStates.State;
 import Main.Handler;
 import Resources.Images;
+import UI.UIImageButton;
 import UI.UIManager;
 
 import java.awt.*;
@@ -46,6 +49,9 @@ public class WorldManager {
 	private int gridWidth, gridHeight; // Size of the grid.
 	private int movementSpeed; // Movement of the tiles going downwards.
 	public boolean dead = false;
+	private int counterCandy = 0;
+	private int heart = 1;
+	private UIManager uiManager;
 
 	public WorldManager(Handler handler) {
 		this.handler = handler;
@@ -156,6 +162,7 @@ public class WorldManager {
 		HazardMovement();
 		HazardCollision();
 		HazardWaterCollision();
+		CandyCollision();
 
 		player.tick();
 		// make player move the same as the areas
@@ -262,6 +269,17 @@ public class WorldManager {
 			}
 		}
 	}
+	public void CandyCollision() {
+		for (int i = 0; i < SpawnedHazards.size(); i++) {
+
+			if (!SpawnedHazards.isEmpty() && SpawnedHazards.get(i)instanceof RareCandy
+					&& SpawnedHazards.get(i).GetCollision() != null
+					&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
+				SpawnedHazards.remove(i);
+				counterCandy++;
+			}
+		}
+	}
 
 	public void render(Graphics g) {
 
@@ -274,10 +292,14 @@ public class WorldManager {
 
 		}
 
+		if (counterCandy >=0 && counterCandy<5) {
 		player.render(g);
+		}else
+		if (counterCandy >= 5) {
+			player.renderVenasaur(g);
+		}
 		this.object2.render(g);
 		MiniMenu(g, Color.BLACK);
-
 	}
 
 	/*
@@ -354,14 +376,17 @@ public class WorldManager {
 		int randInt;
 		int choice = rand.nextInt(9);
 		for (int m = 0; m < rand.nextInt(9); m++) {
-			if (choice <=5 /*&& !(lastSpawned instanceof LillyPad)*/) {
+			if (choice <=5) {
 				randInt = 64 * rand.nextInt(9);
-				SpawnedHazards.add(new Tree(handler, randInt, yPosition));
+				SpawnedHazards.add(new Tree (handler, randInt, yPosition));
+			}else if (choice > 5) {
+				randInt = 64 * rand.nextInt(9);
+				SpawnedHazards.add(new RareCandy (handler, randInt, yPosition));
 			}
 		}
 	}
 	/*NEW
-	 * Given a yPosition this method will spawn a new tree.
+	 * Display a menu on top of the screen that display the score.
 	 */
 	private void MiniMenu(Graphics g, Color d) {
 		Font fontScore = new Font("IMPACT", 30, 28);
@@ -370,6 +395,9 @@ public class WorldManager {
 		g.setColor(Color.WHITE);
 		g.setFont(fontScore);
 		g.drawString("Sapito Score: " + Player.counter, 3, 25);
+		g.drawImage(Images.heart, 520, 0, 30, 30, null);
+		g.drawString(""+heart, 550, 25);
+		g.drawImage(Images.rareCandy, 360, 0, 30, 30, null);
+		g.drawString("" + counterCandy, 400, 25);
 	}
-
 }

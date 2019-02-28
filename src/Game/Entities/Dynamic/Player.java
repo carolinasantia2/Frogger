@@ -211,6 +211,30 @@ public class Player extends EntityBase {
 		}
 		UpdatePlayerRectangle(g);
 	}
+	
+	public void renderVenasaur(Graphics g){
+
+		if(index>=8){
+			index=0;
+			moving = false;
+		}
+
+		switch (facing) {
+		case "UP":
+			g.drawImage(Images.VenasaurUp[index], getX(), getY()-64, getWidth(), getHeight(), null);
+			break;
+		case "DOWN":
+			g.drawImage(Images.VenasaurDown[index], getX(), getY(), getWidth(), getHeight()+10, null);
+			break;
+		case "LEFT":
+			g.drawImage((Images.VenasaurLeft[index]), getX(), getY(), getWidth()+15, getHeight()+15, null);
+			break;
+		case "RIGHT":
+			g.drawImage((Images.VenasaurRight[index]), getX()-64, getY(), getWidth()+15, getHeight()+15, null);
+			break;
+		}
+		UpdatePlayerRectangle(g);
+	}
 
 	// Rectangles are what is used as "collisions." 
 	// The hazards have Rectangles of their own.

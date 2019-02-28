@@ -58,6 +58,8 @@ public class Images {
     public static BufferedImage grass;
     
     public static BufferedImage tree;
+    public static BufferedImage rareCandy;
+    public static BufferedImage heart;
 
     public static BufferedImage[] object;
 
@@ -103,7 +105,6 @@ public class Images {
             Restart[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/restart1.png"));
             Exit[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/exit2.png"));
             Exit[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/exit1.png"));
-            
             
             Player[0]= playerSheet.crop(0,30,52,39);
             Player[1]= playerSheet.crop(53,25,59,46);
@@ -241,8 +242,9 @@ public class Images {
             waterArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/waterArea.png"));
             streetArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/street.png"));
             tree = ImageIO.read(getClass().getResourceAsStream("/Sheets/tree.png"));
+            rareCandy = ImageIO.read(getClass().getResourceAsStream("/Sheets/rareCandy.png"));
+            heart = ImageIO.read(getClass().getResourceAsStream("/Sheets/heart.png"));
 
-            
         }catch (IOException e) {
         e.printStackTrace();
     }
