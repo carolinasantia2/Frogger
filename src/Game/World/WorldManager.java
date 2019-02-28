@@ -55,7 +55,7 @@ public class WorldManager {
 
 		AreasAvailables.add(new GrassArea(handler, 0));
 		AreasAvailables.add(new WaterArea(handler, 0));
-		AreasAvailables.add(new EmptyArea(handler, 0));
+		AreasAvailables.add(new StreetArea(handler, 0));
 
 		StaticEntitiesAvailables.add(new LillyPad(handler, 0, 0));
 		StaticEntitiesAvailables.add(new Log(handler, 0, 0));
@@ -297,7 +297,7 @@ public class WorldManager {
 			randomArea = new WaterArea(handler, yPosition);
 			SpawnHazard(yPosition);
 		} else {
-			randomArea = new EmptyArea(handler, yPosition);
+			randomArea = new StreetArea(handler, yPosition);
 		}
 		return randomArea;
 	}
@@ -330,7 +330,6 @@ public class WorldManager {
 				lastSpawned = new Log(handler, 0, 0); // dummy Log
 			}
 			
-			
 		} else if (choice > 5) {
 
 			for (int m = 0; m < rand.nextInt(7); m++) { // Adds random Lillypads
@@ -355,7 +354,7 @@ public class WorldManager {
 		int randInt;
 		int choice = rand.nextInt(9);
 		for (int m = 0; m < rand.nextInt(9); m++) {
-			if (choice <=5 && !(lastSpawned instanceof LillyPad)) {
+			if (choice <=5 /*&& !(lastSpawned instanceof LillyPad)*/) {
 				randInt = 64 * rand.nextInt(9);
 				SpawnedHazards.add(new Tree(handler, randInt, yPosition));
 			}
@@ -364,7 +363,7 @@ public class WorldManager {
 	/*NEW
 	 * Given a yPosition this method will spawn a new tree.
 	 */
-	private void MiniMenu(Graphics g, Color d) {//menu del score
+	private void MiniMenu(Graphics g, Color d) {
 		Font fontScore = new Font("IMPACT", 30, 28);
 		g.setColor(d);
 		g.fillRect(0, 0, 576, 32);
