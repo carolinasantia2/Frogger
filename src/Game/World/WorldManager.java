@@ -171,8 +171,9 @@ public class WorldManager {
 			SpawnedHazards.get(i).setY(SpawnedHazards.get(i).getY() + movementSpeed);
 
 			// Moves Log or Turtle to the right
-			if (SpawnedHazards.get(i) instanceof Log || SpawnedHazards.get(i) instanceof Turtle) {
+			if (SpawnedHazards.get(i) instanceof Log) {
 				SpawnedHazards.get(i).setX(SpawnedHazards.get(i).getX() + 1);
+				
 
 				// Verifies the hazards Rectangles aren't null and
 				// If the player Rectangle intersects with the Log or Turtle Rectangle, then
@@ -183,11 +184,36 @@ public class WorldManager {
 				}
 
 			}
+			// EXPERIMENTING WITH REVERSE TURTLES ****************************
+			if (SpawnedHazards.get(i) instanceof Turtle) {
+				SpawnedHazards.get(i).setX(SpawnedHazards.get(i).getX() - 1);
+				
+
+				// Verifies the hazards Rectangles aren't null and
+				// If the player Rectangle intersects with the Log or Turtle Rectangle, then
+				// move player to the right.
+				if (SpawnedHazards.get(i).GetCollision() != null
+						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
+					player.setX(player.getX() - 1);
+				}
+
+			}
+			
+			//EXPERIMENTING WITH REVERSE TURTLES *****************************
+			
 
 			// if hazard has passed the screen height, then remove this hazard.
-			if (SpawnedHazards.get(i).getY() > handler.getHeight()) {
+			if (SpawnedHazards.get(i).getY() > handler.getHeight()) { 
 				SpawnedHazards.remove(i);
 			}
+			// Makes logs and turtles "loop"
+			if(SpawnedHazards.get(i) instanceof Log && SpawnedHazards.get(i).getX() > 576) {  
+				SpawnedHazards.get(i).setX(-(SpawnedHazards.get(i).getWidth() + 50)); 
+			}
+			else if(SpawnedHazards.get(i) instanceof Turtle && SpawnedHazards.get(i).getX() < -80) {  
+				SpawnedHazards.get(i).setX(SpawnedHazards.get(i).getWidth() + 576); 
+			}
+			
 		}
 	}
 
@@ -265,27 +291,39 @@ public class WorldManager {
 		Random rand = new Random();
 		int randInt;
 		int choice;
-		if (lastSpawned == null || !(lastSpawned instanceof LillyPad)) {
-			choice = rand.nextInt(7);
-		} else {
+		if (lastSpawned == null) { 
+			choice = rand.nextInt(7);									 
+		}
+		else if(lastSpawned instanceof LillyPad) { // Checks if the last Spawn was a LillyPad 
+			choice = 3;
+		}
+		else if(lastSpawned instanceof Turtle ) { // Checks if the last Spawn was a Turtle
 			choice = 2;
 		}
+		else if (lastSpawned instanceof Log) // Checks if the last Spawn was a Log
+			choice = 6;
+		else
+			choice = 6;
 		if (choice <= 2) {
-			randInt = 64 * rand.nextInt(4);
-			SpawnedHazards.add(new Log(handler, randInt, yPosition));
-			lastSpawned = new Log(handler, 0, 0);
-		} else if (choice >= 5) {
+			for(int n = 0; n < rand.nextInt(3) + 1; n++) { // random logs from 1 to 4
+				randInt = (128 * rand.nextInt(4)) + 64;
+				SpawnedHazards.add(new Log(handler, randInt, yPosition));
+				lastSpawned = new Log(handler, 0, 0); // dummy Log
+			}
+			
+			
+		} else if (choice > 5) {
 
-			for (int m = 0; m < rand.nextInt(7); m++) {
-				randInt = 64 * rand.nextInt(9); // ESTAS TRABAJANDO AQUIIIIIIIIII (*64)
+			for (int m = 0; m < rand.nextInt(7); m++) { // Adds random Lillypads
+				randInt = (64 * rand.nextInt(8)) + 32; 
 				SpawnedHazards.add(new LillyPad(handler, randInt, yPosition));
-				lastSpawned = new LillyPad(handler, 0, 0); // added
+				lastSpawned = new LillyPad(handler, 0, 0); // dummy LillyPad
 
 			}
 		} else {
-			randInt = 64 * rand.nextInt(3);
+			randInt = (64 * rand.nextInt(5)) + 32;
 			SpawnedHazards.add(new Turtle(handler, randInt, yPosition));
-			lastSpawned = new Turtle(handler, 0, 0);
+			lastSpawned = new Turtle(handler, 0, 0); // dummy Turtle
 
 		}
 
@@ -296,13 +334,13 @@ public class WorldManager {
 		int randInt;
 		int choice = rand.nextInt(5);
 		for (int m = 0; m < rand.nextInt(5); m++) {
-			if (choice <=5) {
+			if (choice <=5 && !(lastSpawned instanceof LillyPad)) {
 				randInt = 64 * rand.nextInt(9);
 				SpawnedHazards.add(new Tree(handler, randInt, yPosition));
 			}
 		}
 	}
-	
+
 	private void MiniMenu(Graphics g, Color d) {//menu del score
 		Font fontScore = new Font("IMPACT", 30, 28);
 		g.setColor(d);
