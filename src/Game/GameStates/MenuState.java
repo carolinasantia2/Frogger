@@ -27,7 +27,7 @@ public class MenuState extends State {
             State.setState(handler.getGame().gameState);
         }));
 
-        uiManager.addObjects(new UIImageButton(0 + 175 * 2 -40,  handler.getGame().getHeight() - 200+50, 160, 75, Images.BTitle, () -> {
+        uiManager.addObjects(new UIImageButton(0 + 175 * 2 -40,  handler.getGame().getHeight() - 200+50, 160, 75, Images.Options, () -> {
             handler.getMouseManager().setUimanager(null);
             State.setState(handler.getGame().controlsState);
         }));

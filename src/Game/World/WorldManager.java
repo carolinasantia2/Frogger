@@ -1,11 +1,13 @@
 package Game.World;
 
 import Game.Entities.Dynamic.Player;
+import Game.Entities.Static.Car;
 import Game.Entities.Static.LillyPad;
 import Game.Entities.Static.Log;
 import Game.Entities.Static.RareCandy;
 import Game.Entities.Static.StaticBase;
 import Game.Entities.Static.Tree;
+import Game.Entities.Static.Truck;
 import Game.Entities.Static.Turtle;
 import Game.GameStates.State;
 import Main.Handler;
@@ -162,6 +164,8 @@ public class WorldManager {
 		HazardMovement();
 		HazardCollision();
 		HazardWaterCollision();
+		CarMovement();
+		CarLoop();
 		CandyCollision();
 
 		player.tick();
@@ -190,11 +194,11 @@ public class WorldManager {
 						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
 					player.setX(player.getX() + 1);
 				}
-
+				BondurinInHazard();
 			}
 			// EXPERIMENTING WITH REVERSE TURTLES ****************************
 			if (SpawnedHazards.get(i) instanceof Turtle) {
-				SpawnedHazards.get(i).setX(SpawnedHazards.get(i).getX() - 1);
+				SpawnedHazards.get(i).setX(SpawnedHazards.get(i).getX() - 2);
 				
 
 				// Verifies the hazards Rectangles aren't null and
@@ -202,9 +206,9 @@ public class WorldManager {
 				// move player to the right.
 				if (SpawnedHazards.get(i).GetCollision() != null
 						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
-					player.setX(player.getX() - 1);
+					player.setX(player.getX() - 2);
 				}
-
+				BondurinInHazard();
 			}
 			
 			//EXPERIMENTING WITH REVERSE TURTLES *****************************
@@ -218,10 +222,47 @@ public class WorldManager {
 			if(SpawnedHazards.get(i) instanceof Log && SpawnedHazards.get(i).getX() > 576) {  
 				SpawnedHazards.get(i).setX(-(SpawnedHazards.get(i).getWidth() + 50)); 
 			}
-			else if(SpawnedHazards.get(i) instanceof Turtle && SpawnedHazards.get(i).getX() < -80) {  
+			 if(SpawnedHazards.get(i) instanceof Turtle && SpawnedHazards.get(i).getX() < -80) {  
 				SpawnedHazards.get(i).setX(SpawnedHazards.get(i).getWidth() + 576); 
 			}
 			
+		}
+	}
+	/*NEW
+	 * Make the car and the truck move to left and right, respectively,
+	 * and check if the player have a collision with the car and truck.
+	 */
+	public void CarMovement () {
+		for (int i = 0; i< SpawnedHazards.size() ;  i++) {
+			if (SpawnedHazards.get(i) instanceof Car ) {
+				SpawnedHazards.get(i).setX(SpawnedHazards.get(i).getX() - 1);
+			}
+		}
+		for (int k = 0; k< SpawnedHazards.size() ;  k++) {
+			if (SpawnedHazards.get(k) instanceof Truck ) {
+				SpawnedHazards.get(k).setX(SpawnedHazards.get(k).getX() + 1);
+			}
+		}
+		for (int j = 0; j <SpawnedHazards.size();j++) {
+			if (!SpawnedHazards.isEmpty() && (SpawnedHazards.get(j)instanceof Car || SpawnedHazards.get(j)instanceof Truck)
+					&& SpawnedHazards.get(j).GetCollision() != null
+					&& player.getPlayerCollision().intersects(SpawnedHazards.get(j).GetCollision())) {
+				dead = true;
+			}
+		}
+	}
+	/*NEW
+	 * This method make the car or the truck loop in the screen.
+	 */
+	private void CarLoop(){
+		for (int i = 0; i< SpawnedHazards.size() ;  i++) {
+			
+		if(SpawnedHazards.get(i) instanceof Truck && SpawnedHazards.get(i).getX() > 576) {  
+			SpawnedHazards.get(i).setX(-(SpawnedHazards.get(i).getWidth() + 50)); 
+		}
+		 if(SpawnedHazards.get(i) instanceof Car && SpawnedHazards.get(i).getX() < -80) {  
+			SpawnedHazards.get(i).setX(SpawnedHazards.get(i).getWidth() + 576); 
+		 }
 		}
 	}
 	/*NEW
@@ -254,6 +295,24 @@ public class WorldManager {
 		}
 	}
 	/*NEW
+	 * Make the player can't over step the boundaries of the screen when 
+	 * is in a water hazard. 
+	 */
+	private void BondurinInHazard() {
+		if ((player.getX() > 576 && player.facing.equals("RIGHT")) 
+				|| (player.getX()+64 >576 && player.facing.equals("UP"))
+				|| (player.getX()+64 >576 && player.facing.equals("DOWN"))
+				|| (player.getX()+64 > 576 && player.facing.equals("LEFT"))) {
+			player.setX(player.getX()-5);
+		}
+		if ((player.getX() < 0 && player.facing.equals("RIGHT")) 
+				|| (player.getX() < 0 && player.facing.equals("UP"))
+				|| (player.getX() < 0 && player.facing.equals("DOWN"))
+				|| (player.getX() < 0 && player.facing.equals("LEFT"))) {
+			player.setX(player.getX()+5);
+		}
+	}
+	/*NEW
 	 * Check if the player intersect a water hazard
 	 */
 	public void HazardWaterCollision() {
@@ -269,6 +328,9 @@ public class WorldManager {
 			}
 		}
 	}
+	/*NEW
+	 * Check if the player touch the candies. If this happen, the candy is removed.
+	 */
 	public void CandyCollision() {
 		for (int i = 0; i < SpawnedHazards.size(); i++) {
 
@@ -280,7 +342,9 @@ public class WorldManager {
 			}
 		}
 	}
-
+	/*
+	 * Display all the base area, static area, player, etc.  
+	 */
 	public void render(Graphics g) {
 
 		for (BaseArea area : SpawnedAreas) {
@@ -320,6 +384,7 @@ public class WorldManager {
 			SpawnHazard(yPosition);
 		} else {
 			randomArea = new StreetArea(handler, yPosition);
+			SpawnHazard3(yPosition);
 		}
 		return randomArea;
 	}
@@ -346,22 +411,22 @@ public class WorldManager {
 		else
 			choice = 6;
 		if (choice <= 2) {
-			for(int n = 0; n < rand.nextInt(3) + 1; n++) { // random logs from 1 to 4
-				randInt = (128 * rand.nextInt(4)) + 64;
+			for(int n = 0; n < rand.nextInt(9) ; n++) { // random logs from 1 to 4
+				randInt = (128 * rand.nextInt(5)+1);
 				SpawnedHazards.add(new Log(handler, randInt, yPosition));
 				lastSpawned = new Log(handler, 0, 0); // dummy Log
 			}
 			
 		} else if (choice > 5) {
 
-			for (int m = 0; m < rand.nextInt(7); m++) { // Adds random Lillypads
-				randInt = (64 * rand.nextInt(8)); 
+			for (int m = 0; m < rand.nextInt(9)+1; m++) { // Adds random Lillypads
+				randInt = (64 * rand.nextInt(8)+1); 
 				SpawnedHazards.add(new LillyPad(handler, randInt, yPosition));
 				lastSpawned = new LillyPad(handler, 0, 0); // dummy LillyPad
 
 			}
 		} else {
-			randInt = (64 * rand.nextInt(5)) + 32;
+			randInt = (64 * rand.nextInt(9)+1) + 32;
 			SpawnedHazards.add(new Turtle(handler, randInt, yPosition));
 			lastSpawned = new Turtle(handler, 0, 0); // dummy Turtle
 
@@ -386,6 +451,24 @@ public class WorldManager {
 		}
 	}
 	/*NEW
+	 * Given a yPosition this method will spawn a new car or truck.
+	 */
+	private void SpawnHazard3 (int yPosition) {
+		Random rand = new Random();
+		int randInt;
+		int choice = rand.nextInt(6);
+		for (int m = 0; m < rand.nextInt(9); m++) {
+			if (choice <3) {
+				randInt = 64 * rand.nextInt(3);
+				SpawnedHazards.add(new Car(handler, randInt, yPosition));
+			}else 
+				if (choice >=3 && choice <=6) {
+					randInt = 64 * rand.nextInt(3);
+					SpawnedHazards.add(new Truck(handler, randInt, yPosition));
+				}
+		}
+	}
+	/*NEW
 	 * Display a menu on top of the screen that display the score.
 	 */
 	private void MiniMenu(Graphics g, Color d) {
@@ -397,7 +480,10 @@ public class WorldManager {
 		g.drawString("Sapito Score: " + Player.counter, 3, 25);
 		g.drawImage(Images.heart, 520, 0, 30, 30, null);
 		g.drawString(""+heart, 550, 25);
-		g.drawImage(Images.rareCandy, 360, 0, 30, 30, null);
-		g.drawString("" + counterCandy, 400, 25);
+		g.drawImage(Images.rareCandy, 360+40, 0, 30, 30, null);
+		g.drawString("" + counterCandy, 400+40, 25);
+		Font fontScore1 = new Font("IMPACT", 9, 12);
+		g.setFont(fontScore1);
+		g.drawString("Eat 5 Rare Candies to evolve!", 230, 25);
 	}
 }

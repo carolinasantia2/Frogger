@@ -19,251 +19,255 @@ import java.io.IOException;
 public class Images {
 
 
-    public static BufferedImage[] butstart;
-    public static BufferedImage title;
-    public static BufferedImage Pause;
-    public static BufferedImage[] Resume;
-    public static BufferedImage[] BTitle;
-    public static BufferedImage[] Options;
-    public static BufferedImage[] Restart;
-    public static BufferedImage[] Exit;
-    public static ImageIcon icon;
-    public static String str;
-    public static BufferedImage icon2;
-    public static BufferedImage gameover;
-    public static BufferedImage controls;
+	public static BufferedImage[] butstart;
+	public static BufferedImage title;
+	public static BufferedImage Pause;
+	public static BufferedImage[] Resume;
+	public static BufferedImage[] BTitle;
+	public static BufferedImage[] Options;
+	public static BufferedImage[] Restart;
+	public static BufferedImage[] Exit;
+	public static ImageIcon icon;
+	public static String str;
+	public static BufferedImage icon2;
+	public static BufferedImage gameover;
+	public static BufferedImage controls;
 
-    public static SpriteSheet playerSheet;
-    public static SpriteSheet playerSheet2;
-    public static BufferedImage[] Player;
-    public static BufferedImage[] Turtle;
-    public static SpriteSheet WaterSheet;
-    public static BufferedImage[] Water;
-
-
-    public static BufferedImage player;
-    public static BufferedImage[] BulbasaurDown;
-    public static BufferedImage[] BulbasaurUp;
-    public static BufferedImage[] BulbasaurLeft;
-    public static BufferedImage[] BulbasaurRight;
-    
-    public static BufferedImage[]VenasaurDown;
-    public static BufferedImage[]VenasaurUp;
-    public static BufferedImage[]VenasaurLeft;
-    public static BufferedImage[]VenasaurRight;
-    
-    public static BufferedImage grassArea;
-    public static BufferedImage waterArea;
-    public static BufferedImage streetArea;
-    public static BufferedImage lilly;
-    public static BufferedImage log;
-    public static BufferedImage grass;
-    
-    public static BufferedImage tree;
-    public static BufferedImage rareCandy;
-    public static BufferedImage heart;
-
-    public static BufferedImage[] object;
+	public static SpriteSheet playerSheet;
+	public static SpriteSheet playerSheet2;
+	public static BufferedImage[] Player;
+	public static BufferedImage[] Turtle;
+	public static SpriteSheet WaterSheet;
+	public static BufferedImage[] Water;
 
 
-    public Images() {
+	public static BufferedImage player;
+	public static BufferedImage[] BulbasaurDown;
+	public static BufferedImage[] BulbasaurUp;
+	public static BufferedImage[] BulbasaurLeft;
+	public static BufferedImage[] BulbasaurRight;
 
-        butstart = new BufferedImage[3];
-        Resume = new BufferedImage[2];
-        BTitle = new BufferedImage[2];
-        Options = new BufferedImage[2];
-        Restart = new BufferedImage[2];
-        Exit = new BufferedImage[2];
-        Player = new BufferedImage[8];
-        BulbasaurDown = new BufferedImage[8];
-        BulbasaurLeft = new BufferedImage[8];
-        BulbasaurRight = new BufferedImage[8];
-        BulbasaurUp = new BufferedImage[8];
-        VenasaurDown = new BufferedImage[8];
-        VenasaurLeft = new BufferedImage[8];
-        VenasaurRight = new BufferedImage[8];
-        VenasaurUp = new BufferedImage[8];
-        Turtle = new BufferedImage[20];
-        Water = new BufferedImage[3];
-        object = new BufferedImage[6];
+	public static BufferedImage[]VenasaurDown;
+	public static BufferedImage[]VenasaurUp;
+	public static BufferedImage[]VenasaurLeft;
+	public static BufferedImage[]VenasaurRight;
 
-        try {
-            playerSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/gameSprites.png")));
-            playerSheet2 = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/gameSprite2.png")));
-            WaterSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/water.png")));
-            
-            title = ImageIO.read(getClass().getResourceAsStream("/Buttons/Menu.png"));
-            Pause = ImageIO.read(getClass().getResourceAsStream("/Buttons/Pause.png"));
-            gameover = ImageIO.read(getClass().getResourceAsStream("/Buttons/GameOverState.png"));
-            controls = ImageIO.read(getClass().getResourceAsStream("/Buttons/Controls.png"));
-            Resume[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/ResumeButton.png"));
-            Resume[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/ResumeButton2.png"));
-            BTitle[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/TitleButton.png"));
-            BTitle[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/TitleButton2.png"));
-            Options[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/OptionsButton.png"));
-            Options[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/OptinsButton2.png"));
-            butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/StartButton.png"));//normbut
-            butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/Startbutton2.png"));//hoverbut
-            butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/StartButton3.png"));//clickbut
-            Restart[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/restart2.png"));
-            Restart[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/restart1.png"));
-            Exit[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/exit2.png"));
-            Exit[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/exit1.png"));
-            
-            Player[0]= playerSheet.crop(0,30,52,39);
-            Player[1]= playerSheet.crop(53,25,59,46);
-            Player[2]= playerSheet.crop(114,20,56,51);
-            Player[3]= playerSheet.crop(173,9,53,64);
-            Player[4]= playerSheet.crop(230,2,54,73);
-            Player[5]= playerSheet.crop(229,1,56,75);
-            Player[6]= playerSheet.crop(285,18,59,54);
-            Player[7]= playerSheet.crop(0,30,52,39);Player[0]= playerSheet.crop(0,30,52,39);
-            
-            BulbasaurDown[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down1.png"));
-            BulbasaurDown[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down2.png"));
-            BulbasaurDown[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down1.png"));
-            BulbasaurDown[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down2.png"));
-            BulbasaurDown[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down1.png"));
-            BulbasaurDown[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down2.png"));
-            BulbasaurDown[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down1.png"));
-            BulbasaurDown[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down2.png"));
-            
-            BulbasaurLeft[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left1.png"));
-            BulbasaurLeft[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left2.png"));
-            BulbasaurLeft[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left1.png"));
-            BulbasaurLeft[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left2.png"));
-            BulbasaurLeft[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left1.png"));
-            BulbasaurLeft[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left2.png"));
-            BulbasaurLeft[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left1.png"));
-            BulbasaurLeft[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left2.png"));
-            
-            BulbasaurRight[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right1.png"));
-            BulbasaurRight[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right2.png"));
-            BulbasaurRight[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right1.png"));
-            BulbasaurRight[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right2.png"));
-            BulbasaurRight[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right1.png"));
-            BulbasaurRight[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right2.png"));
-            BulbasaurRight[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right1.png"));
-            BulbasaurRight[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right2.png"));
-            
-            BulbasaurUp[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up1.png"));
-            BulbasaurUp[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up2.png"));
-            BulbasaurUp[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up1.png"));
-            BulbasaurUp[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up2.png"));
-            BulbasaurUp[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up1.png"));
-            BulbasaurUp[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up2.png"));
-            BulbasaurUp[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up1.png"));
-            BulbasaurUp[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up2.png"));
-            
-            VenasaurDown[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down1.png"));
-            VenasaurDown[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down2.png"));
-            VenasaurDown[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down1.png"));
-            VenasaurDown[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down2.png"));
-            VenasaurDown[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down1.png"));
-            VenasaurDown[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down2.png"));
-            VenasaurDown[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down1.png"));
-            VenasaurDown[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down2.png"));
-            
-            VenasaurUp[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up1.png"));
-            VenasaurUp[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up2.png"));
-            VenasaurUp[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up1.png"));
-            VenasaurUp[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up2.png"));
-            VenasaurUp[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up1.png"));
-            VenasaurUp[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up2.png"));
-            VenasaurUp[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up1.png"));
-            VenasaurUp[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up2.png"));
-            
-            VenasaurLeft[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left1.png"));
-            VenasaurLeft[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left2.png"));
-            VenasaurLeft[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left1.png"));
-            VenasaurLeft[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left2.png"));
-            VenasaurLeft[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left1.png"));
-            VenasaurLeft[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left2.png"));
-            VenasaurLeft[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left1.png"));
-            VenasaurLeft[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left2.png"));
-            
-            VenasaurRight[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right1.png"));
-            VenasaurRight[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right2.png"));
-            VenasaurRight[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right1.png"));
-            VenasaurRight[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right2.png"));
-            VenasaurRight[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right1.png"));
-            VenasaurRight[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right2.png"));
-            VenasaurRight[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right1.png"));
-            VenasaurRight[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right2.png"));
-            
-         // emerges
-            Turtle[0] = playerSheet2.crop(26, 88, 71, 57);
-            Turtle[1] = playerSheet2.crop(90, 88, 71, 57);
-            Turtle[2] = playerSheet2.crop(152, 88, 71, 57);
-            
-            Turtle[3] = playerSheet2.crop(126, 10, 71, 58);
-            Turtle[4] = playerSheet2.crop(50, 8, 71, 62);
-            
-            Turtle[5] = playerSheet2.crop(521, 82, 72, 68);
-            Turtle[6] = playerSheet2.crop(448, 82, 72, 68);
-            Turtle[7] = playerSheet2.crop(375, 82, 72, 68);
-            
-            Turtle[8] = playerSheet2.crop(300, 88, 72, 58);
-            Turtle[9] = playerSheet2.crop(228, 88, 72, 58);
-            Turtle[10] = playerSheet2.crop(126, 10, 71, 58);
-            
-            Turtle[11] = playerSheet2.crop(50, 8, 71, 62);
-            Turtle[12] = playerSheet2.crop(521, 82, 72, 68);
-            Turtle[13] = playerSheet2.crop(448, 82, 72, 68);
-            
+	public static BufferedImage grassArea;
+	public static BufferedImage waterArea;
+	public static BufferedImage streetArea;
+	public static BufferedImage lilly;
+	public static BufferedImage log;
+	public static BufferedImage grass;
 
-            Turtle[14] = playerSheet2.crop(375, 82, 72, 68);
-            Turtle[15] = playerSheet2.crop(300, 88, 72, 58);
-            Turtle[16] = playerSheet2.crop(228, 88, 72, 58);
-            
-            // sinks
-            Turtle[17] = playerSheet2.crop(152, 88, 71, 57);
-            Turtle[18] = playerSheet2.crop(90, 88, 71, 57);
-            Turtle[19] = playerSheet2.crop(26, 88, 71, 57);
+	public static BufferedImage tree;
+	public static BufferedImage car1;
+	public static BufferedImage truck;
+	public static BufferedImage rareCandy;
+	public static BufferedImage heart;
 
-            Water[0]= WaterSheet.crop(0,0,32,32);
-            Water[1]= WaterSheet.crop(32,0,32,32);
-            Water[2]= WaterSheet.crop(64,0,32,32);
+	public static BufferedImage[] object;
 
 
-            lilly = playerSheet.crop(6,170,61,55);
-            log = ImageIO.read(getClass().getResourceAsStream("/Sheets/log1.png"));
-            
-            object[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Objects/object1.png"));
-            object[1] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Objects/object2.png"));
-            object[2] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Objects/object3.png"));
-            object[3] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Objects/object4.png"));
-            object[4] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Objects/object5.png"));
-            object[5] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Objects/object6.png"));
-            str = GameSetUp.str;
+	public Images() {
 
-            icon =  new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/Sheets/froggy.png")));
-            
-            player = ImageIO.read(getClass().getResourceAsStream("/Sheets/froggy.png"));
-            grass = ImageIO.read(getClass().getResourceAsStream("/Sheets/grass.jpg"));
+		butstart = new BufferedImage[3];
+		Resume = new BufferedImage[2];
+		BTitle = new BufferedImage[2];
+		Options = new BufferedImage[2];
+		Restart = new BufferedImage[2];
+		Exit = new BufferedImage[2];
+		Player = new BufferedImage[8];
+		BulbasaurDown = new BufferedImage[8];
+		BulbasaurLeft = new BufferedImage[8];
+		BulbasaurRight = new BufferedImage[8];
+		BulbasaurUp = new BufferedImage[8];
+		VenasaurDown = new BufferedImage[8];
+		VenasaurLeft = new BufferedImage[8];
+		VenasaurRight = new BufferedImage[8];
+		VenasaurUp = new BufferedImage[8];
+		Turtle = new BufferedImage[20];
+		Water = new BufferedImage[3];
+		object = new BufferedImage[6];
 
-            grassArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/grassArea.png"));
-            waterArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/waterArea.png"));
-            streetArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/street.png"));
-            tree = ImageIO.read(getClass().getResourceAsStream("/Sheets/tree.png"));
-            rareCandy = ImageIO.read(getClass().getResourceAsStream("/Sheets/rareCandy.png"));
-            heart = ImageIO.read(getClass().getResourceAsStream("/Sheets/heart.png"));
+		try {
+			playerSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/gameSprites.png")));
+			playerSheet2 = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/gameSprite2.png")));
+			WaterSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/water.png")));
 
-        }catch (IOException e) {
-        e.printStackTrace();
-    }
+			title = ImageIO.read(getClass().getResourceAsStream("/Buttons/Menu.png"));
+			Pause = ImageIO.read(getClass().getResourceAsStream("/Buttons/Pause.png"));
+			gameover = ImageIO.read(getClass().getResourceAsStream("/Buttons/GameOverState.png"));
+			controls = ImageIO.read(getClass().getResourceAsStream("/Buttons/Controls.png"));
+			Resume[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/ResumeButton.png"));
+			Resume[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/ResumeButton2.png"));
+			BTitle[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/TitleButton.png"));
+			BTitle[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/TitleButton2.png"));
+			Options[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/OptionsButton.png"));
+			Options[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/OptinsButton2.png"));
+			butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/StartButton.png"));//normbut
+			butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/Startbutton2.png"));//hoverbut
+			butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/StartButton3.png"));//clickbut
+			Restart[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/restart2.png"));
+			Restart[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/restart1.png"));
+			Exit[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/exit2.png"));
+			Exit[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/exit1.png"));
+
+			Player[0]= playerSheet.crop(0,30,52,39);
+			Player[1]= playerSheet.crop(53,25,59,46);
+			Player[2]= playerSheet.crop(114,20,56,51);
+			Player[3]= playerSheet.crop(173,9,53,64);
+			Player[4]= playerSheet.crop(230,2,54,73);
+			Player[5]= playerSheet.crop(229,1,56,75);
+			Player[6]= playerSheet.crop(285,18,59,54);
+			Player[7]= playerSheet.crop(0,30,52,39);Player[0]= playerSheet.crop(0,30,52,39);
+
+			BulbasaurDown[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down1.png"));
+			BulbasaurDown[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down2.png"));
+			BulbasaurDown[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down1.png"));
+			BulbasaurDown[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down2.png"));
+			BulbasaurDown[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down1.png"));
+			BulbasaurDown[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down2.png"));
+			BulbasaurDown[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down1.png"));
+			BulbasaurDown[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/down2.png"));
+
+			BulbasaurLeft[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left1.png"));
+			BulbasaurLeft[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left2.png"));
+			BulbasaurLeft[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left1.png"));
+			BulbasaurLeft[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left2.png"));
+			BulbasaurLeft[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left1.png"));
+			BulbasaurLeft[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left2.png"));
+			BulbasaurLeft[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left1.png"));
+			BulbasaurLeft[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/left2.png"));
+
+			BulbasaurRight[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right1.png"));
+			BulbasaurRight[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right2.png"));
+			BulbasaurRight[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right1.png"));
+			BulbasaurRight[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right2.png"));
+			BulbasaurRight[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right1.png"));
+			BulbasaurRight[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right2.png"));
+			BulbasaurRight[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right1.png"));
+			BulbasaurRight[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/right2.png"));
+
+			BulbasaurUp[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up1.png"));
+			BulbasaurUp[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up2.png"));
+			BulbasaurUp[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up1.png"));
+			BulbasaurUp[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up2.png"));
+			BulbasaurUp[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up1.png"));
+			BulbasaurUp[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up2.png"));
+			BulbasaurUp[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up1.png"));
+			BulbasaurUp[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/bulbasaur/up2.png"));
+
+			VenasaurDown[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down1.png"));
+			VenasaurDown[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down2.png"));
+			VenasaurDown[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down1.png"));
+			VenasaurDown[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down2.png"));
+			VenasaurDown[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down1.png"));
+			VenasaurDown[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down2.png"));
+			VenasaurDown[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down1.png"));
+			VenasaurDown[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/down2.png"));
+
+			VenasaurUp[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up1.png"));
+			VenasaurUp[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up2.png"));
+			VenasaurUp[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up1.png"));
+			VenasaurUp[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up2.png"));
+			VenasaurUp[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up1.png"));
+			VenasaurUp[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up2.png"));
+			VenasaurUp[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up1.png"));
+			VenasaurUp[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/up2.png"));
+
+			VenasaurLeft[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left1.png"));
+			VenasaurLeft[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left2.png"));
+			VenasaurLeft[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left1.png"));
+			VenasaurLeft[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left2.png"));
+			VenasaurLeft[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left1.png"));
+			VenasaurLeft[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left2.png"));
+			VenasaurLeft[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left1.png"));
+			VenasaurLeft[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/left2.png"));
+
+			VenasaurRight[0]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right1.png"));
+			VenasaurRight[1]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right2.png"));
+			VenasaurRight[2]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right1.png"));
+			VenasaurRight[3]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right2.png"));
+			VenasaurRight[4]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right1.png"));
+			VenasaurRight[5]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right2.png"));
+			VenasaurRight[6]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right1.png"));
+			VenasaurRight[7]= ImageIO.read(getClass().getResourceAsStream("/Sheets/venasaur/right2.png"));
+
+			// emerges
+			Turtle[0] = playerSheet2.crop(26, 88, 71, 57);
+			Turtle[1] = playerSheet2.crop(90, 88, 71, 57);
+			Turtle[2] = playerSheet2.crop(152, 88, 71, 57);
+
+			Turtle[3] = playerSheet2.crop(126, 10, 71, 58);
+			Turtle[4] = playerSheet2.crop(50, 8, 71, 62);
+
+			Turtle[5] = playerSheet2.crop(521, 82, 72, 68);
+			Turtle[6] = playerSheet2.crop(448, 82, 72, 68);
+			Turtle[7] = playerSheet2.crop(375, 82, 72, 68);
+
+			Turtle[8] = playerSheet2.crop(300, 88, 72, 58);
+			Turtle[9] = playerSheet2.crop(228, 88, 72, 58);
+			Turtle[10] = playerSheet2.crop(126, 10, 71, 58);
+
+			Turtle[11] = playerSheet2.crop(50, 8, 71, 62);
+			Turtle[12] = playerSheet2.crop(521, 82, 72, 68);
+			Turtle[13] = playerSheet2.crop(448, 82, 72, 68);
 
 
-    }
+			Turtle[14] = playerSheet2.crop(375, 82, 72, 68);
+			Turtle[15] = playerSheet2.crop(300, 88, 72, 58);
+			Turtle[16] = playerSheet2.crop(228, 88, 72, 58);
 
-    public static BufferedImage loadImage(String path) {
-        try {
-            return ImageIO.read(Images.class.getResourceAsStream(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        return null;
-    }
+			// sinks
+			Turtle[17] = playerSheet2.crop(152, 88, 71, 57);
+			Turtle[18] = playerSheet2.crop(90, 88, 71, 57);
+			Turtle[19] = playerSheet2.crop(26, 88, 71, 57);
+
+			Water[0]= WaterSheet.crop(0,0,32,32);
+			Water[1]= WaterSheet.crop(32,0,32,32);
+			Water[2]= WaterSheet.crop(64,0,32,32);
+
+
+			lilly = playerSheet.crop(6,170,61,55);
+			log = ImageIO.read(getClass().getResourceAsStream("/Sheets/log1.png"));
+
+			object[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Objects/object1.png"));
+			object[1] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Objects/object2.png"));
+			object[2] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Objects/object3.png"));
+			object[3] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Objects/object4.png"));
+			object[4] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Objects/object5.png"));
+			object[5] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Objects/object6.png"));
+			str = GameSetUp.str;
+
+			icon =  new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/Sheets/froggy.png")));
+
+			player = ImageIO.read(getClass().getResourceAsStream("/Sheets/froggy.png"));
+			grass = ImageIO.read(getClass().getResourceAsStream("/Sheets/grass.jpg"));
+
+			grassArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/grassArea.png"));
+			waterArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/waterArea.png"));
+			streetArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/street.png"));
+			tree = ImageIO.read(getClass().getResourceAsStream("/Sheets/tree.png"));
+			rareCandy = ImageIO.read(getClass().getResourceAsStream("/Sheets/rareCandy.png"));
+			heart = ImageIO.read(getClass().getResourceAsStream("/Sheets/heart.png"));
+			car1 = ImageIO.read(getClass().getResourceAsStream("/Sheets/car1.png"));
+			truck = ImageIO.read(getClass().getResourceAsStream("/Sheets/car2.png"));
+
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+	}
+
+	public static BufferedImage loadImage(String path) {
+		try {
+			return ImageIO.read(Images.class.getResourceAsStream(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+		return null;
+	}
 
 }

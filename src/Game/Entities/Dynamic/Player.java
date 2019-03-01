@@ -270,7 +270,7 @@ public class Player extends EntityBase {
 	public Rectangle getPlayerCollision() {
 		return player;
 	}
-	/*
+	/*NEW
 	 * Check if the player is in the water area and kill him.
 	 */
 	public void HazardCollision2() {
